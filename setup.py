@@ -7,7 +7,7 @@ class PostInstallCommand(install):
         install.run(self)
 
         if shutil.which("cloudflared"):
-            print("cloudflared zaten sistemde mevcut, indirme atlandı.")
+            print("cloudflared already exists, skipping installation.")
             return
 
         url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"
