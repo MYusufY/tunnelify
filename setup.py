@@ -31,12 +31,12 @@ class PostInstallCommand(install):
 
 setup(
     name="tunnelify",
-    version="0.1.0",
+    version="0.2.0",
     packages=find_packages(),
     include_package_data=True,
     author="Yusuf YILDIRIM",
     author_email="yusuf@tachion.tech",
-    description="A simple package for easily creating Cloudflared Tunnels.",
+    description="A simple package for easily creating Cloudflare or Localtunnel tunnels.",
     long_description=open("README.md").read() if os.path.exists("README.md") else "",
     long_description_content_type="text/markdown",
     url="https://github.com/MYusufY/tunnelify",

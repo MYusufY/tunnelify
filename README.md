@@ -1,22 +1,23 @@
 # Tunnelify
 
-Tunnelify is a Python library to easily create and manage Cloudflare tunnels, powered by Cloudflared.
+Tunnelify is a Python library to easily create and manage Cloudflare or Localtunnel tunnels.
 
 # Example
 
 ```python
 from tunnelify import tunnel
 
-url, proc = tunnel(8000) # Create a tunnel on port 8000
-print(url) # trycloudflare.com URL
+# For Cloudflare
+url, proc = tunnel(8000, "cloudflare")
+print(f"Cloudflare URL: {url}")
 
-while True:
-    val = input("'exit' to exit: ")
+# For Localtunnel (without custom subdomain)
+url, _ = tunnel(8000, "localtunnel")
+print(f"Localtunnel URL: {url}")
 
-    if val == "e":
-        proc.terminate()
-        break
-    else: pass
+# For Localtunnel with custom subdomain
+url, _ = tunnel(8000, "localtunnel", "customsub")
+print(f"Custom Localtunnel URL: {url}")
 ```
 
 # Installation
