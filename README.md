@@ -25,4 +25,4 @@ print(f"Custom Localtunnel URL: {url}")
 Just:
 `pip install tunnelify`
 
-Tunnelify requires Cloudflared package to work. If it doesn't exist on your system, Tunnelify will automatically install it.
+Tunnelify requires Cloudflared package to work.

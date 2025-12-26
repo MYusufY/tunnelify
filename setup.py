@@ -1,37 +1,9 @@
 from setuptools import setup, find_packages
-from setuptools.command.install import install
-import subprocess, sys, platform, os, shutil
-
-class PostInstallCommand(install):
-    def run(self):
-        install.run(self)
-
-        if shutil.which("cloudflared"):
-            print("cloudflared already exists, skipping installation.")
-            return
-
-        url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"
-        filename = "cloudflared"
-
-        if platform.system() == "Darwin":
-            url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-darwin-amd64.tgz"
-        elif platform.system() == "Windows":
-            url = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"
-            filename = "cloudflared.exe"
-
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "requests"])
-        import requests
-
-        r = requests.get(url)
-        with open(filename, "wb") as f:
-            f.write(r.content)
-
-        if platform.system() != "Windows":
-            os.chmod(filename, 0o755)
+import os
 
 setup(
     name="tunnelify",
-    version="0.3.0",
+    version="0.4.0",
     packages=find_packages(),
     include_package_data=True,
     author="Yusuf YILDIRIM",
@@ -48,5 +20,4 @@ setup(
         "Topic :: System :: Networking",
     ],
     python_requires=">=3.6",
-    cmdclass={"install": PostInstallCommand},
 )
