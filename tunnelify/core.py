@@ -6,11 +6,15 @@ import time
 import platform
 
 def _check_cloudflared():
-    if not shutil.which("cloudflared"):
+    cloudflared_cmd = "cloudflared.exe" if platform.system() == "Windows" else "cloudflared"
+    
+    if not shutil.which(cloudflared_cmd):
         raise Exception(
             "cloudflared is not installed. Please install it from: "
             "https://github.com/cloudflare/cloudflared/releases"
         )
+    
+    return cloudflared_cmd
 
 def _check_localtunnel():
     lt_cmd = "lt.cmd" if platform.system() == "Windows" else "lt"
@@ -24,10 +28,10 @@ def _check_localtunnel():
     return lt_cmd
 
 def cloudflare_tunnel(port):
-    _check_cloudflared()
+    cloudflared_cmd = _check_cloudflared()
     
     proc = subprocess.Popen(
-        ["cloudflared", "tunnel", "--url", f"http://localhost:{port}"],
+        [cloudflared_cmd, "tunnel", "--url", f"http://localhost:{port}"],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True

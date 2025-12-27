@@ -3,7 +3,7 @@ import os
 
 setup(
     name="tunnelify",
-    version="0.4.0",
+    version="0.3.2",
     packages=find_packages(),
     include_package_data=True,
     author="Yusuf YILDIRIM",
